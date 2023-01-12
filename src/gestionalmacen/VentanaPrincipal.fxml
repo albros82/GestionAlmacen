@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="870.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VentanaPrincipalController">
+   <children>
+      <BorderPane prefHeight="870.0" prefWidth="1216.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
+                        <MenuItem mnemonicParsing="false" onAction="#crearArticulo" text="Crear articulo..." />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#mostrarArticulo" text="Mostrar articulo" />
+                        <MenuItem mnemonicParsing="false" onAction="#mostrarUbicacion" text="Mostrar ubicación" />
+                        <MenuItem mnemonicParsing="false" onAction="#mostrarTrazabilidad" text="Mostrar trazabilidad" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#salir" text="Salir" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <Label text="Bienvenidos a la aplicación de almacén" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold Italic" size="48.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -5,6 +5,10 @@
  */
 package gestionalmacen;
 
+import controlador.VentanaPrincipalController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,21 +21,43 @@ import javafx.stage.Stage;
  */
 public class GestionAlmacen extends Application {
     
+    public Stage stage;
+    private Scene login;
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
+        
+        
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         
-        Scene scene = new Scene(root);
+        Scene login = new Scene(root);
         
-        stage.setScene(scene);
+        stage.setScene(login);
+        stage.setResizable(false);
         stage.show();
-    }
-
+        
+        
+    }   
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void lanzarVentana(Stage stage) throws Exception{
+        
+        Stage ventanaPrincipal = new Stage();
+        
+        Scene escena = new Scene(FXMLLoader.load(getClass().getResource("VentanaPrincipal.fxml")));
+        
+        ventanaPrincipal.setScene(escena);        
+        ventanaPrincipal.show();       
+        
+        stage.close();
     }
     
 }
