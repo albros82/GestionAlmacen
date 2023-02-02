@@ -25,7 +25,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modelo.ArchivoUsuario;
 import modelo.Usuario;
+import vista.Alerta;
 
 /**
  *
@@ -33,8 +35,12 @@ import modelo.Usuario;
  */
 public class LoginController implements Initializable {
     
-    Usuario user = null;
-    GestionAlmacen gestion = null;
+    
+    private GestionVentanas ventana = null;    
+    private VentanaPrincipalController vpc = null;
+    private ArchivoUsuario au = null;
+    private Alerta alerta = new Alerta();
+    
     
     @FXML
     private TextField txtUsuario, txtContrasena;
@@ -43,32 +49,35 @@ public class LoginController implements Initializable {
     private void entrar(ActionEvent event) {
         
         ComprobarLogin cl = new ComprobarLogin(txtUsuario.getText(), txtContrasena.getText());
+        String[] resultado = cl.comprobarUsuario();
         
-        if(cl.comprobarUsuario()==0){
-            user = new Usuario(txtUsuario.getText(), txtContrasena.getText()); 
-            gestion = new GestionAlmacen();
-            try {
-                Node source = (Node) event.getSource();
-                Stage stage = (Stage) source.getScene().getWindow();
-                
-                gestion.lanzarVentana(stage);
-                
-            } catch (Exception ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            
-        }else if (cl.comprobarUsuario()==1){
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setHeaderText("El usuario o contraseña son erroneos");
-            alerta.setTitle("Error de login");
-            alerta.show();
-        }else if (cl.comprobarUsuario()==2){
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setHeaderText("Ha ocurrido un fallo en la conexión con la base de datos");
-            alerta.setTitle("Error de conexión");
-            alerta.show();
+        switch (resultado[0]) {
+            case "0":
+                ventana = new GestionVentanas();
+                try {
+                    Node source = (Node) event.getSource();
+                    Stage stage = (Stage) source.getScene().getWindow();               
+                    
+                    au = new ArchivoUsuario();
+                    au.setArchivoUsuario(txtUsuario.getText(), txtContrasena.getText());
+                    
+                    ventana.getVentanaPrincipal(stage);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }   break;
+            case "1":
+                {
+                    alerta.getMostrarAlerta("Error de login", "El usuario o contraseña son erroneos", Alert.AlertType.ERROR);                    
+                    break;
+                }
+            case "2":
+                {
+                    alerta.getMostrarAlerta("Error de conexión", "Ha ocurrido un fallo en la conexión con la base de datos", Alert.AlertType.ERROR);                       
+                    break;
+                }
+            default:
+                break;
         }
         
     }

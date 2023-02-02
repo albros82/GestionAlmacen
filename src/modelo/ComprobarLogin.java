@@ -34,46 +34,44 @@ public class ComprobarLogin {
         this.contrasena = contrasena;
         
     }
+    
+    public ComprobarLogin(){
+        
+    }
               
-    public int comprobarUsuario(){          
+    public String[] comprobarUsuario(){          
+        
+        String[] resultado = new String[4];
         
         try {            
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/GestionAlmacen", "root", "Fqmk5839*");       
+            con = DriverManager.getConnection("jdbc:mysql://localhost/GestionAlmacen", usuario, contrasena);       
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select * from usuario where nomusuario='" + usuario  + "' and contrasena=MD5('"+contrasena+"');");
+            ResultSet rs = st.executeQuery("Select * from usuario where nomUsuario='" + usuario  + "' and contrasena='"+contrasena+"';");
             
-            if (rs.next()){
-                conexion=0;
-            }else{
-                conexion=1;
+            
+            if(rs.next()){
+                resultado[0]="0";            
+                resultado[1]=rs.getString("nomUsuario");
+                resultado[2]=rs.getString("contrasena");
+                resultado[3]=rs.getString("permiso");
             }
-            
-            
+            con.close();
                     
         } catch (com.mysql.jdbc.exceptions.jdbc4.CommunicationsException e){
-            conexion=2;
-            return conexion;
+            resultado[0]="2";
+            return resultado;
         
         }catch (SQLException ex) {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            conexion=2;
-            return conexion;
+            resultado[0]="1";
+            return resultado;
         }catch (ClassNotFoundException ex) {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            try {
-                con.close();
-            } catch (SQLException ex) {                
-                //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                conexion=2;
-                System.out.println("Error de conexion");
-                return conexion; 
-                
-            }
-        }        
+            
+        }       
         
-        return conexion;
+        return resultado;
         
     }
     

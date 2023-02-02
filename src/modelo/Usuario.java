@@ -13,10 +13,12 @@ public class Usuario {
     
     private final String USUARIO;
     private final String CONTRASENA;
+    private final boolean PERMISO;
     
-    public Usuario(String usuario, String contrasena){
+    public Usuario(String usuario, String contrasena, boolean permiso){
         USUARIO = usuario;
         CONTRASENA = contrasena;
+        PERMISO = permiso;
     }
 
     public String getUSUARIO() {
@@ -27,6 +29,8 @@ public class Usuario {
         return CONTRASENA;
     }
     
-    
+    public boolean getPermiso(){
+        return PERMISO;
+    }
     
 }

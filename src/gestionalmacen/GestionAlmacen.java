@@ -21,15 +21,13 @@ import javafx.stage.Stage;
  */
 public class GestionAlmacen extends Application {
     
-    public Stage stage;
-    private Scene login;
-    
+      
     
     @Override
     public void start(Stage stage) throws Exception {
         
         
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/Login.fxml"));
         
         Scene login = new Scene(root);
         

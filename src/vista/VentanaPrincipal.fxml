@@ -17,8 +17,8 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Archivo">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." />
-                        <MenuItem mnemonicParsing="false" onAction="#crearArticulo" text="Crear articulo..." />
+                    <MenuItem mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario..." fx:id="mCrearUsuario"/>
+                        <MenuItem mnemonicParsing="false" onAction="#crearArticulo" text="Crear articulo..." fx:id="mCrearArticulo"/>
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#mostrarArticulo" text="Mostrar articulo" />
                         <MenuItem mnemonicParsing="false" onAction="#mostrarUbicacion" text="Mostrar ubicación" />
